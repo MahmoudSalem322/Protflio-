@@ -86,7 +86,7 @@ export default function Portfolio() {
           {/* Subtitle */}
           <div className="flex flex-col items-center z-20 gap-8">
             <p className="max-w-2xl text-lg md:text-2xl text-[#BBCCD7] leading-relaxed font-light">
-              A Software Engineer & Web Developer. I build high-performance digital platforms and harness the power of advanced AI to engineer the future of the web.
+              Full-stack Developer working with Next.js and Node.js. I build web applications with AI-assisted workflows using Codex and Claude.
             </p>
           </div>
         </div>
@@ -102,10 +102,10 @@ export default function Portfolio() {
           </h2>
           <div className="md:w-1/2 flex flex-col gap-8">
             <p className="text-xl md:text-3xl font-light text-white/80 leading-relaxed">
-              I am a professional Frontend Web Developer dedicated to building high-performance digital environments. Specializing in <span className="font-bold text-white">Next.js</span> and modern UI architecture, I transform complex ideas into captivating web experiences.
+              I am a Full-stack Developer building web applications with <span className="font-bold text-white">Next.js and Node.js</span>. My work connects responsive interfaces with backend services, APIs, and databases to turn ideas into working products.
             </p>
             <p className="text-lg md:text-xl text-[#8899A6] leading-relaxed">
-              Beyond engineering, I possess extensive experience in tech education and training. I am deeply passionate about mentoring the next generation of developers, breaking down advanced concepts into actionable knowledge, and empowering others to build at the bleeding edge of modern technology.
+              I use AI tools such as Codex and Claude throughout my projects to support planning, implementation, debugging, and code review, while checking the results and taking responsibility for the final work. I also worked as an assistant trainer in CodeMap 3, helping learners understand and apply programming concepts.
             </p>
           </div>
         </div>
@@ -118,9 +118,9 @@ export default function Portfolio() {
           
           <div className="flex flex-col">
             {[
-              { num: '01', title: 'End-to-End Project Development', desc: 'Architecting and building professional-grade applications from initial concept through every stage of the software development lifecycle.' },
-              { num: '02', title: 'Pixel-Perfect Figma to Code', desc: 'Transforming complex Figma designs into highly responsive, interactive, and flawless Next.js web applications with immaculate precision.' },
-              { num: '03', title: 'AI-Driven Software Solutions', desc: 'Innovating and integrating advanced Artificial Intelligence models to solve complex software challenges and automate digital workflows.' }
+              { num: '01', title: 'Full-stack Web Development', desc: 'Building web applications with Next.js and Node.js, from responsive user interfaces to backend services, authentication, and database integration.' },
+              { num: '02', title: 'Backend APIs & Integration', desc: 'Developing Node.js APIs, connecting frontend applications to backend services, and integrating data and third-party services into practical workflows.' },
+              { num: '03', title: 'AI-assisted Development', desc: 'Using Codex and Claude to support project planning, implementation, debugging, and code review, with careful validation of generated code and the final application.' }
             ].map((service) => (
               <div key={service.num} className="group flex flex-col md:flex-row gap-6 md:gap-16 items-start border-t-2 border-black/10 py-12 hover:bg-black/[0.02] transition-colors rounded-2xl px-4 md:px-8 -mx-4 md:-mx-8">
                 <span className="text-6xl md:text-[8rem] leading-none font-black text-black/10 group-hover:text-[#B600A8] transition-colors duration-500 shrink-0">
@@ -185,7 +185,7 @@ export default function Portfolio() {
             Let's build<br />something<br />extraordinary.
           </h2>
           <p className="text-xl md:text-2xl text-[#8899A6] max-w-2xl font-light mb-16 leading-relaxed">
-            Ready to engineer the next big thing? Whether it's a massive architecture or an immersive web experience, I'm ready to craft it.
+            Have a web application in mind? From the interface to the backend, I can help build it with Next.js, Node.js, and an AI-assisted development workflow.
           </p>
 
           <div className="flex flex-wrap justify-center gap-8 md:gap-12 mb-40">
