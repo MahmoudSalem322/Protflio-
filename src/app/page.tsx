@@ -143,9 +143,11 @@ export default function Portfolio() {
           
           <div className="relative flex flex-col gap-12 md:gap-0">
             {[
-              { id: 1, title: 'Masar Platform', desc: 'Enterprise-grade institution management ecosystem. Architected with Next.js and Tailwind CSS to deliver seamless administrative workflows, absolute scalability, and bleeding-edge performance.', color: 'from-[#0C1E3E] to-[#123063]', link: 'https://masar-ivory-beta.vercel.app/' },
-              { id: 2, title: 'Workflow Nets', desc: 'A comprehensive, world-class enterprise and project management platform. Engineered to streamline complex organizational structures and deliver high-level operational efficiency globally.', color: 'from-[#18011F] to-[#7621B0]', link: 'https://www.workflownets.com/' },
-              { id: 3, title: 'Humanitarian Logistical Hubs', desc: 'Specialized data analytics interface helping streamline multi-site parcel monitoring systems.', color: 'from-[#3E1A0C] to-[#BE4C00]', link: '#' }
+              { id: 1, title: 'Masar Platform', desc: 'A project showcase for a modular institution management platform, covering operations, employees, tasks, and reporting. Built with React, TypeScript, and Vite.', color: 'from-[#0C1E3E] to-[#123063]', link: 'https://masartesting.vercel.app/' },
+              { id: 2, title: 'Workflow Nets', desc: 'A workspace for projects, tasks, teams, clients, and invoices, with chat, video meetings, and performance dashboards. My role focused on frontend development with Next.js, React, TypeScript, and Tailwind CSS.', color: 'from-[#18011F] to-[#7621B0]', link: 'https://www.workflownets.com/' },
+              { id: 3, title: 'Shifa', desc: 'A healthcare platform connecting patients with doctors, health centers, and pharmacies. Features include appointment booking, medicine requests and donations, and prescription reading. Built with Next.js, React, JavaScript, and Tailwind CSS.', color: 'from-[#07352F] to-[#087F74]', link: 'https://github.com/MahmoudSalem322/Shifa-v1' },
+              { id: 4, title: 'Smart Spend', desc: 'A personal finance web app for tracking accounts, income, expenses, budgets, and savings goals. Built with React, JavaScript, and Vite, with Arabic and English interfaces and a Laravel REST API integration.', color: 'from-[#252047] to-[#514297]', link: 'https://github.com/MahmoudSalem322/smart' },
+              { id: 5, title: 'Humanitarian Logistical Hubs', desc: 'Specialized data analytics interface helping streamline multi-site parcel monitoring systems.', color: 'from-[#3E1A0C] to-[#BE4C00]', link: '#' }
             ].map((proj, i) => (
               <div 
                 key={proj.id} 
