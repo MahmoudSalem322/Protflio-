@@ -9,8 +9,8 @@ const kanit = Kanit({
 });
 
 export const metadata: Metadata = {
-  title: "Mahmoud Salem | Elite Frontend Engineer",
-  description: "A Software Engineer & Multimedia Specialist creating production-grade automation systems and unforgettable visual platforms.",
+  title: "Mahmoud Salem | Full-stack Developer",
+  description: "Full-stack Developer working with Next.js and Node.js, using AI-assisted development workflows with Codex and Claude to build web applications.",
 };
 
 export default function RootLayout({
