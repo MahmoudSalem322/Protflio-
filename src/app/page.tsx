@@ -8,6 +8,7 @@ const navigation = [
   { label: "Services", href: "#services" },
   { label: "Work", href: "#projects" },
   { label: "Experience", href: "#experience" },
+  { label: "CV", href: "#cv" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -156,6 +157,15 @@ export default function Portfolio() {
               </li>
             ))}
           </ul>
+        </section>
+
+        <section id="cv" className="shell section" aria-labelledby="cv-title">
+          <h2 id="cv-title" data-reveal="fade-up">CV</h2>
+          <div data-reveal="fade-up" style={entranceDelay(200)}>
+            <a className="button" href="/Mahmoud_Salem_CV.pdf" target="_blank" rel="noopener">
+              View my CV (PDF) <ArrowUpRight size={18} aria-hidden="true" />
+            </a>
+          </div>
         </section>
 
         <section id="contact" className="contact" aria-labelledby="contact-title">

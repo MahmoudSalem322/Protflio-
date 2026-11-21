@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://protflio-peach.vercel.app/" },
   title: "Mahmoud Salem | Full-stack Developer",
   description: "Full-stack Developer working with Next.js and Node.js, using AI-assisted development workflows with Codex and Claude to build web applications.",
 };
