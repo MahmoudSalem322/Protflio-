@@ -1,228 +1,182 @@
-'use client';
+import Image from "next/image";
+import type { CSSProperties } from "react";
+import { ScrollReveals } from "@/components/ScrollReveals";
+import { ArrowDown, ArrowUpRight, Braces, Layers3, Sparkles } from "lucide-react";
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, Moon, Square, Mail } from 'lucide-react';
-
-const Linkedin = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-    <rect x="2" y="9" width="4" height="12"></rect>
-    <circle cx="4" cy="4" r="2"></circle>
-  </svg>
-);
-
-const Github = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3-.3 6-1.5 6-6.5a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 5 3 6.2 6 6.5a4.8 4.8 0 0 0-1 3.2v4"></path>
-  </svg>
-);
-
-
-const NAV_LINKS = [
-  { id: 'about', label: 'About', href: '#about' },
-  { id: 'services', label: 'Services', href: '#services' },
-  { id: 'projects', label: 'Work', href: '#projects' },
-  { id: 'contact', label: "Let's Talk", href: '#contact' },
+const navigation = [
+  { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
+  { label: "Work", href: "#projects" },
+  { label: "Experience", href: "#experience" },
+  { label: "Contact", href: "#contact" },
 ];
 
-export default function Portfolio() {
-  const [activeTab, setActiveTab] = useState('about');
+const services = [
+  { icon: Layers3, title: "Full-stack development", description: "Responsive web applications with Next.js and Node.js, from the interface to authentication and database integration." },
+  { icon: Braces, title: "APIs & integrations", description: "Node.js APIs that connect web applications to databases, backend services, and third-party tools." },
+  { icon: Sparkles, title: "AI-assisted development", description: "Planning, debugging, and reviewing code with Codex and Claude, with hands-on validation of the final result." },
+];
 
+const projects = [
+  { title: "Masar Platform", category: "Institution management", stack: "React · TypeScript · Vite", description: "A showcase for a modular platform covering operations, employees, tasks, and reporting.", href: "https://masartesting.vercel.app/", theme: "blue" },
+  { title: "Workflow Nets", category: "Team collaboration", stack: "Next.js · TypeScript · Tailwind CSS", description: "Frontend development for a workspace with projects, tasks, clients, invoices, chat, and video meetings.", href: "https://www.workflownets.com/", theme: "violet" },
+  { title: "Shifa", category: "Healthcare", stack: "Next.js · React · JavaScript", description: "A platform connecting patients with healthcare providers for appointments, medicine requests, donations, and prescriptions.", href: "https://github.com/MahmoudSalem322/Shifa-v1", theme: "teal" },
+  { title: "Qabas", category: "Education", stack: "Flutter · Dart · Riverpod", description: "An offline-first learning workspace for web and Android with courses, Markdown notes, reminders, and progress tracking in Arabic and English.", href: "https://github.com/MahmoudSalem322/personal_learning_os", theme: "blue" },
+  { title: "Islamic Companion App", category: "Mobile app", stack: "Flutter · Dart · Drift", description: "An Arabic offline-first app for Quran reading, tafsir, adhkar, prayer times, qibla, and reminders.", href: "https://github.com/MahmoudSalem322/hadeel-app", theme: "teal" },
+  { title: "Humanitarian Logistical Hubs", category: "Data analytics", description: "A data analytics interface for monitoring parcels across multiple sites.", theme: "sand" },
+];
+
+const experience = [
+  {
+    organization: "Workflow",
+    role: "Frontend Developer",
+    period: "Jul 2026 – Present",
+    summary: "Build and maintain responsive features for a SaaS workspace where agile teams plan, manage, and collaborate on their work.",
+    contribution: "Integrate interfaces built with Next.js, TypeScript, and Tailwind CSS with backend services and collaborate through GitHub and Vercel.",
+  },
+  {
+    organization: "TAQAT Academy",
+    role: "Co-Mentor, CodeMap Program",
+    period: "Jul 2026 – Present",
+    summary: "Support the lead mentor and coach trainees on clean, maintainable code and applying the software development lifecycle to real projects.",
+    contribution: "Help trainees use AI development tools responsibly to improve productivity and code quality.",
+  },
+  {
+    organization: "TAQAT Academy · CodeMap Program",
+    role: "Frontend Developer (Trainee)",
+    period: "May – Aug 2026",
+    summary: "Took ownership of the Next.js frontend for Masar, a management platform for institutions and NGOs, as part of a mentored development team.",
+    contribution: "Collaborated with teammates using Git, GitHub, and Vercel.",
+  },
+];
+
+const profiles = [
+  { label: "GitHub", href: "https://github.com/MahmoudSalem322" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/mahmoud-salem-052495419" },
+];
+
+function entranceDelay(milliseconds: number): CSSProperties {
+  return { "--entry-delay": `${milliseconds}ms` } as CSSProperties;
+}
+
+export default function Portfolio() {
   return (
-    <div className="relative w-full min-h-screen bg-[#0C0C0C] text-white selection:bg-[#B600A8] selection:text-white font-sans">
-      
-      {/* Premium Floating Navbar */}
-      <header className="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl z-50 flex justify-between items-center px-6 md:px-10 py-3 bg-[#111111]/40 backdrop-blur-xl border border-white/10 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
-        <a href="#" className="font-black text-white tracking-[0.2em] uppercase text-sm md:text-base transition-opacity hover:opacity-80 whitespace-nowrap">
-          Mahmoud Salem
-        </a>
-        <nav className="hidden md:flex items-center gap-2 text-[10px] lg:text-xs font-bold tracking-[0.2em] uppercase text-[#8899A6]">
-          {/* Animated Nav Links */}
-          <div className="flex bg-black/20 p-1 rounded-full border border-white/5 relative">
-            {NAV_LINKS.map((link) => (
-              <a 
-                key={link.id}
-                href={link.href} 
-                onClick={() => setActiveTab(link.id)}
-                className={`relative px-6 py-2.5 rounded-full transition-colors z-10 flex items-center justify-center ${activeTab === link.id ? 'text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]' : 'hover:text-white'}`}
-              >
-                {activeTab === link.id && (
-                  <motion.div 
-                    layoutId="active-nav-indicator"
-                    className="absolute inset-0 bg-gradient-to-tr from-white/20 to-white/5 backdrop-blur-2xl border border-white/30 shadow-[inset_0_0_20px_rgba(255,255,255,0.3),_0_4px_20px_rgba(0,0,0,0.5)] rounded-full -z-10"
-                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  />
-                )}
-                {link.label}
-              </a>
-            ))}
-          </div>
-        </nav>
+    <>
+      <a className="skip-link" href="#main">Skip to content</a>
+      <header className="site-header">
+        <div className="shell header-inner">
+          <a className="wordmark" href="#home"><span aria-hidden="true">MS</span> Mahmoud Salem</a>
+          <nav aria-label="Main navigation">
+            {navigation.map(({ label, href }) => <a key={href} href={href}>{label}</a>)}
+          </nav>
+        </div>
       </header>
 
-      {/* 1. HERO SECTION */}
-      <section className="relative w-full h-screen flex flex-col z-10 overflow-hidden">
-        
-        {/* Luxury Animated Background (High-Res Image + CSS Pan) */}
-        <div className="absolute inset-0 w-full h-full z-0 pointer-events-none opacity-40 overflow-hidden">
-          <img 
-            src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" 
-            alt="Luxury Dark Liquid Background" 
-            className="w-full h-full object-cover animate-pan"
-          />
-          {/* Gradient Overlay for seamless blending */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0C0C0C]/30 via-[#0C0C0C]/80 to-[#0C0C0C]"></div>
-        </div>
-
-        {/* Hero Body */}
-        <div className="flex-1 flex flex-col justify-center items-center text-center px-4 lg:px-12 relative z-20">
-          
-          {/* Hero Title */}
-          <h1 className="hero-heading font-black text-[clamp(3.5rem,10vw,12vw)] leading-[1.1] lowercase z-20 mb-8 cursor-default px-4">
-            hi, i'm mahmoud salem
-          </h1>
-
-          {/* Subtitle */}
-          <div className="flex flex-col items-center z-20 gap-8">
-            <p className="max-w-2xl text-lg md:text-2xl text-[#BBCCD7] leading-relaxed font-light">
-              Full-stack Developer working with Next.js and Node.js. I build web applications with AI-assisted workflows using Codex and Claude.
-            </p>
-          </div>
-        </div>
-      </section>
-
-
-
-      {/* 3. ABOUT SECTION */}
-      <section id="about" className="relative z-30 bg-[#0C0C0C] py-32 px-4 lg:px-12 flex justify-center border-t border-white/5">
-        <div className="max-w-5xl flex flex-col md:flex-row gap-16 items-center md:items-start">
-          <h2 className="text-[clamp(3rem,8vw,6rem)] font-black leading-none uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-white/20 md:w-1/2">
-            The<br />Architect
-          </h2>
-          <div className="md:w-1/2 flex flex-col gap-8">
-            <p className="text-xl md:text-3xl font-light text-white/80 leading-relaxed">
-              I am a Full-stack Developer building web applications with <span className="font-bold text-white">Next.js and Node.js</span>. My work connects responsive interfaces with backend services, APIs, and databases to turn ideas into working products.
-            </p>
-            <p className="text-lg md:text-xl text-[#8899A6] leading-relaxed">
-              I use AI tools such as Codex and Claude throughout my projects to support planning, implementation, debugging, and code review, while checking the results and taking responsibility for the final work. I also worked as an assistant trainer in CodeMap 3, helping learners understand and apply programming concepts.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. SERVICES ARTIFACT LISTING */}
-      <section id="services" className="relative z-20 bg-[#FFFFFF] text-[#0C0C0C] pt-32 pb-40 rounded-t-[3rem] md:rounded-t-[5rem] px-4 lg:px-12 mt-10">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-[clamp(3rem,8vw,6rem)] font-black mb-24 tracking-tighter">Services.</h2>
-          
-          <div className="flex flex-col">
-            {[
-              { num: '01', title: 'Full-stack Web Development', desc: 'Building web applications with Next.js and Node.js, from responsive user interfaces to backend services, authentication, and database integration.' },
-              { num: '02', title: 'Backend APIs & Integration', desc: 'Developing Node.js APIs, connecting frontend applications to backend services, and integrating data and third-party services into practical workflows.' },
-              { num: '03', title: 'AI-assisted Development', desc: 'Using Codex and Claude to support project planning, implementation, debugging, and code review, with careful validation of generated code and the final application.' }
-            ].map((service) => (
-              <div key={service.num} className="group flex flex-col md:flex-row gap-6 md:gap-16 items-start border-t-2 border-black/10 py-12 hover:bg-black/[0.02] transition-colors rounded-2xl px-4 md:px-8 -mx-4 md:-mx-8">
-                <span className="text-6xl md:text-[8rem] leading-none font-black text-black/10 group-hover:text-[#B600A8] transition-colors duration-500 shrink-0">
-                  {service.num}
-                </span>
-                <div className="flex-1 mt-2 md:mt-6">
-                  <h3 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight">{service.title}</h3>
-                  <p className="text-xl md:text-2xl text-black/60 leading-relaxed max-w-3xl font-light">{service.desc}</p>
-                </div>
+      <main id="main">
+        <ScrollReveals />
+        <section id="home" className="hero" aria-labelledby="hero-title">
+          <div className="shell hero-inner">
+            <div>
+              <p className="eyebrow" data-entrance="" style={entranceDelay(200)}>Full-stack developer</p>
+              <h1 id="hero-title" data-entrance="" style={entranceDelay(300)}>Mahmoud<br />Salem<span>.</span></h1>
+              <p className="hero-description" data-entrance="" style={entranceDelay(400)}>I build web applications with Next.js and Node.js, connecting responsive interfaces to APIs and databases.</p>
+              <div className="hero-actions" data-entrance="" style={entranceDelay(500)}>
+                <a className="button" href="#projects">View my work <ArrowDown size={18} aria-hidden="true" /></a>
+                <a className="text-link" href="#contact">Get in touch <ArrowUpRight size={17} aria-hidden="true" /></a>
               </div>
+            </div>
+            <div className="portrait" data-entrance="portrait">
+              <Image src="/mahmoud-salem.png" alt="Mahmoud Salem" width={1254} height={1254}
+                sizes="(max-width: 700px) 90vw, (max-width: 1160px) 40vw, 450px" preload />
+            </div>
+          </div>
+        </section>
+
+        <section id="about" className="shell section about" aria-labelledby="about-title">
+          <h2 id="about-title" data-reveal="fade-up">About me</h2>
+          <div data-reveal="zoom-in" style={entranceDelay(500)}>
+            <p>I build the frontend and backend of web applications, from responsive pages to the services and databases behind them.</p>
+            <p>I use Codex and Claude to support planning, implementation, debugging, and code review.</p>
+            <ul className="tech-list" aria-label="Technologies">
+              {["Next.js", "Node.js", "React", "TypeScript", "Flutter"].map((tech) => <li key={tech}>{tech}</li>)}
+            </ul>
+          </div>
+        </section>
+
+        <section id="services" className="shell section" aria-labelledby="services-title">
+          <h2 id="services-title" data-reveal="fade-up">Services</h2>
+          <div className="services-grid">
+            {services.map(({ icon: Icon, title, description }, index) => (
+              <article className="service" key={title} data-reveal="zoom-out-up" style={entranceDelay(200 + index * 100)}>
+                <Icon size={26} aria-hidden="true" />
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </article>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 5. PROJECT CARDS (Sticky Stacking Deck) */}
-      <section id="projects" className="relative z-30 bg-[#0C0C0C] pt-32 pb-64 px-4 lg:px-12">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-[clamp(3rem,8vw,6rem)] font-black mb-24 tracking-tighter text-white">Selected Works.</h2>
-          
-          <div className="relative flex flex-col gap-12 md:gap-0">
-            {[
-              { id: 1, title: 'Masar Platform', desc: 'A project showcase for a modular institution management platform, covering operations, employees, tasks, and reporting. Built with React, TypeScript, and Vite.', color: 'from-[#0C1E3E] to-[#123063]', link: 'https://masartesting.vercel.app/' },
-              { id: 2, title: 'Workflow Nets', desc: 'A workspace for projects, tasks, teams, clients, and invoices, with chat, video meetings, and performance dashboards. My role focused on frontend development with Next.js, React, TypeScript, and Tailwind CSS.', color: 'from-[#18011F] to-[#7621B0]', link: 'https://www.workflownets.com/' },
-              { id: 3, title: 'Shifa', desc: 'A healthcare platform connecting patients with doctors, health centers, and pharmacies. Features include appointment booking, medicine requests and donations, and prescription reading. Built with Next.js, React, JavaScript, and Tailwind CSS.', color: 'from-[#07352F] to-[#087F74]', link: 'https://github.com/MahmoudSalem322/Shifa-v1' },
-              { id: 4, title: 'Qabas', desc: 'An offline-first learning workspace for web and Android. Organize courses and resources, write Markdown notes, manage tasks and reminders, and track learning progress. Built with Flutter, Dart, Riverpod, and local storage, with Arabic and English support.', color: 'from-[#142A46] to-[#365E94]', link: 'https://github.com/MahmoudSalem322/personal_learning_os' },
-              { id: 5, title: 'Islamic Companion App', desc: 'An offline-first app for Quran reading and tafsir, adhkar, duas, and hadith. Includes locally calculated prayer times, a qibla compass, tasbeeh, bookmarks, and local reminders. Built with Flutter, Dart, Riverpod, and Drift, with Arabic support and light and dark themes.', color: 'from-[#12362E] to-[#367D66]', link: 'https://github.com/MahmoudSalem322/hadeel-app' },
-              { id: 6, title: 'Humanitarian Logistical Hubs', desc: 'Specialized data analytics interface helping streamline multi-site parcel monitoring systems.', color: 'from-[#3E1A0C] to-[#BE4C00]', link: '#' }
-            ].map((proj, i) => (
-              <div 
-                key={proj.id} 
-                className={`md:sticky w-full min-h-[60vh] rounded-[3rem] p-8 md:p-20 flex flex-col justify-between border border-white/10 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] bg-gradient-to-br ${proj.color}`}
-                style={{ top: `calc(15vh + ${i * 40}px)`, zIndex: i }}
-              >
-                <div>
-                  <div className="flex flex-col md:flex-row justify-between md:items-start mb-12 gap-8">
-                    <h3 className="text-4xl md:text-7xl font-black max-w-3xl leading-[1.1] tracking-tight">{proj.title}</h3>
-                    <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                      <ArrowRight className="w-8 h-8 md:w-12 md:h-12 text-white -rotate-45" />
-                    </div>
+        <section id="projects" className="shell section" aria-labelledby="projects-title">
+          <h2 id="projects-title" data-reveal="fade-up">Selected work</h2>
+          <div className="project-grid">
+            {projects.map(({ title, category, stack, description, href, theme }, index) => (
+              <article className="project" data-theme={theme} key={title} data-reveal="fade-up" style={entranceDelay(200 + index * 100)}>
+                <div className="project-heading">
+                  <div>
+                    <p className="project-category">{category}</p>
+                    <h3>{title}</h3>
                   </div>
-                  <p className="text-xl md:text-3xl text-white/80 max-w-2xl font-light leading-relaxed">{proj.desc}</p>
+                  {href && (
+                    <a className="project-link" href={href} aria-label={`Open ${title}`}>
+                      <ArrowUpRight size={21} aria-hidden="true" />
+                    </a>
+                  )}
                 </div>
-                <div className="flex justify-start md:justify-end mt-16 md:mt-0">
-                  <a href={proj.link} target="_blank" rel="noopener noreferrer" className="px-8 py-4 rounded-full border border-[#D7E2EA] text-[#D7E2EA] hover:bg-[#D7E2EA] hover:text-[#0C0C0C] transition-all font-bold tracking-widest uppercase flex items-center gap-3">
-                    View Project <ArrowRight className="w-5 h-5" />
-                  </a>
-                </div>
-              </div>
+                <p>{description}</p>
+                {stack && <p className="stack">{stack}</p>}
+              </article>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 6. CONTACT SECTION */}
-      <section id="contact" className="relative z-40 bg-[#080808] pt-40 pb-16 px-4 lg:px-12 border-t border-white/5 rounded-t-[3rem] md:rounded-t-[5rem] mt-[-10rem] shadow-[0_-20px_50px_rgba(0,0,0,0.8)] overflow-hidden">
-        {/* Decorative background glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[50vh] bg-gradient-to-b from-[#3b82f6]/10 via-[#B600A8]/5 to-transparent blur-[120px] rounded-full pointer-events-none"></div>
+        <section id="experience" className="shell section" aria-labelledby="experience-title">
+          <h2 id="experience-title" data-reveal="fade-up">Experience</h2>
+          <ul className="experience-list">
+            {experience.map(({ role, organization, period, summary, contribution }, index) => (
+              <li className="experience-entry" key={role} data-reveal="fade-up" style={entranceDelay(200 + index * 100)}>
+                <span className="experience-period">
+                  {period}
+                </span>
+                <div>
+                  <p className="experience-organization">{organization}</p>
+                  <h3>{role}</h3>
+                  <p className="experience-detail">{summary}</p>
+                  <p className="experience-detail">{contribution}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
 
-        <div className="max-w-6xl mx-auto flex flex-col items-center text-center relative z-10">
-          <h2 className="text-[clamp(3.5rem,8vw,8rem)] font-black mb-8 tracking-tighter leading-[0.9] text-transparent bg-clip-text bg-gradient-to-b from-white to-white/30">
-            Let's build<br />something<br />extraordinary.
-          </h2>
-          <p className="text-xl md:text-2xl text-[#8899A6] max-w-2xl font-light mb-16 leading-relaxed">
-            Have a web application in mind? From the interface to the backend, I can help build it with Next.js, Node.js, and an AI-assisted development workflow.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-8 md:gap-12 mb-40">
-            {/* Interactive Social Circles as Main CTAs */}
-            <a 
-              href="https://www.linkedin.com/in/mahmoud-salem-052495419" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="group flex items-center justify-center w-20 h-20 md:w-28 md:h-28 rounded-full bg-white/[0.02] backdrop-blur-xl border border-white/10 transition-all duration-500 hover:scale-110 hover:bg-[#0A66C2]/10 hover:border-[#0A66C2] shadow-[inset_0_0_30px_rgba(255,255,255,0.05),_0_8px_32px_rgba(0,0,0,0.5)] hover:shadow-[inset_0_0_50px_rgba(10,102,194,0.3),_0_20px_50px_rgba(10,102,194,0.5)]"
-            >
-              <Linkedin className="w-8 h-8 md:w-12 md:h-12 text-white/40 group-hover:text-[#0A66C2] transition-colors duration-500" />
-            </a>
-
-            <a 
-              href="https://github.com/MahmoudSalem322" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="group flex items-center justify-center w-20 h-20 md:w-28 md:h-28 rounded-full bg-white/[0.02] backdrop-blur-xl border border-white/10 transition-all duration-500 hover:scale-110 hover:bg-white/10 hover:border-white shadow-[inset_0_0_30px_rgba(255,255,255,0.05),_0_8px_32px_rgba(0,0,0,0.5)] hover:shadow-[inset_0_0_50px_rgba(255,255,255,0.2),_0_20px_50px_rgba(255,255,255,0.4)]"
-            >
-              <Github className="w-8 h-8 md:w-12 md:h-12 text-white/40 group-hover:text-white transition-colors duration-500" />
-            </a>
-
-            <a 
-              href="mailto:mahmoudsalem3321@gmail.com" 
-              className="group flex items-center justify-center w-20 h-20 md:w-28 md:h-28 rounded-full bg-white/[0.02] backdrop-blur-xl border border-white/10 transition-all duration-500 hover:scale-110 hover:bg-[#EA4335]/10 hover:border-[#EA4335] shadow-[inset_0_0_30px_rgba(255,255,255,0.05),_0_8px_32px_rgba(0,0,0,0.5)] hover:shadow-[inset_0_0_50px_rgba(234,67,53,0.3),_0_20px_50px_rgba(234,67,53,0.5)]"
-            >
-              <Mail className="w-8 h-8 md:w-12 md:h-12 text-white/40 group-hover:text-[#EA4335] transition-colors duration-500" />
-            </a>
+        <section id="contact" className="contact" aria-labelledby="contact-title">
+          <div className="shell contact-inner">
+            <div data-reveal="fade-up">
+              <p className="eyebrow">Contact</p>
+              <h2 id="contact-title">Have a project in mind?</h2>
+            </div>
+            <div className="contact-links" data-reveal="fade-up" style={entranceDelay(500)}>
+              <a className="button" href="mailto:mahmoudsalem3321@gmail.com">Email me <ArrowUpRight size={18} aria-hidden="true" /></a>
+              <div className="profiles">
+                {profiles.map(({ label, href }) => (
+                  <a className="text-link" href={href} key={label}>{label} <ArrowUpRight size={15} aria-hidden="true" /></a>
+                ))}
+              </div>
+            </div>
           </div>
+        </section>
+      </main>
 
-          {/* Clean Footer */}
-          <div className="w-full flex justify-center items-center border-t border-white/10 pt-10">
-            <span className="text-white/30 font-bold uppercase tracking-widest text-xs">© 2026 Mahmoud Salem. All rights reserved.</span>
-          </div>
-        </div>
-      </section>
-
-    </div>
+      <footer className="shell site-footer">© {new Date().getFullYear()} Mahmoud Salem</footer>
+    </>
   );
 }
