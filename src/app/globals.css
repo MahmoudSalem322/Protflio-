@@ -223,6 +223,7 @@ body { margin: 0; }
   background: var(--accent);
 }
 .experience-period { color: var(--muted); font-size: .88rem; }
+.experience-duration { display: block; margin-top: 5px; color: var(--accent); font-size: .78rem; font-weight: 700; letter-spacing: .02em; }
 .experience-organization { margin-bottom: 5px; color: var(--accent); font-size: .9rem; font-weight: 700; }
 .experience-entry h3 { margin-bottom: 10px; font-size: clamp(1.2rem, 2.5vw, 1.55rem); font-weight: 700; line-height: 1.2; }
 .experience-detail { max-width: 680px; color: var(--muted); line-height: 1.6; }

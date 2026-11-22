@@ -26,7 +26,39 @@ const projects = [
   { title: "Humanitarian Logistical Hubs", category: "Data analytics", description: "A data analytics interface for monitoring parcels across multiple sites.", theme: "sand" },
 ];
 
-const experience = [
+type MonthRef = { year: number; month: number };
+type Experience = {
+  organization: string;
+  role: string;
+  period: string;
+  duration?: string;
+  summary: string;
+  contribution: string;
+};
+
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function formatMonth({ year, month }: MonthRef): string {
+  return `${monthNames[month - 1]} ${year}`;
+}
+
+function inclusiveMonths(start: MonthRef, end: MonthRef): number {
+  return (end.year - start.year) * 12 + (end.month - start.month) + 1;
+}
+
+function formatDuration(months: number): string {
+  if (months < 12) return `${months} month${months === 1 ? "" : "s"}`;
+  const years = Math.floor(months / 12);
+  const remaining = months % 12;
+  if (!remaining) return `${years} year${years === 1 ? "" : "s"}`;
+  return `${years} yr ${remaining} mo`;
+}
+
+const coMentorStart: MonthRef = { year: 2026, month: 7 };
+const today = new Date();
+const thisMonth: MonthRef = { year: today.getFullYear(), month: today.getMonth() + 1 };
+
+const experience: Experience[] = [
   {
     organization: "Workflow",
     role: "Frontend Developer",
@@ -37,9 +69,10 @@ const experience = [
   {
     organization: "TAQAT Academy",
     role: "Co-Mentor, CodeMap Program",
-    period: "Jul 2026 – Present",
-    summary: "Support the lead mentor and coach trainees on clean, maintainable code and applying the software development lifecycle to real projects.",
-    contribution: "Help trainees use AI development tools responsibly to improve productivity and code quality.",
+    period: `${formatMonth(coMentorStart)} – ${formatMonth(thisMonth)}`,
+    duration: formatDuration(inclusiveMonths(coMentorStart, thisMonth)),
+    summary: "Supported the lead mentor and coached trainees on clean, maintainable code and applying the software development lifecycle to real projects.",
+    contribution: "Helped trainees use AI development tools responsibly to improve productivity and code quality.",
   },
   {
     organization: "TAQAT Academy · CodeMap Program",
@@ -150,10 +183,11 @@ export default function Portfolio() {
         <section id="experience" className="shell section" aria-labelledby="experience-title">
           <h2 id="experience-title" data-reveal="fade-up">Experience</h2>
           <ul className="experience-list">
-            {experience.map(({ role, organization, period, summary, contribution }, index) => (
+            {experience.map(({ role, organization, period, duration, summary, contribution }, index) => (
               <li className="experience-entry" key={role} data-reveal="fade-up" style={entranceDelay(200 + index * 100)}>
                 <span className="experience-period">
                   {period}
+                  {duration && <span className="experience-duration">{duration}</span>}
                 </span>
                 <div>
                   <p className="experience-organization">{organization}</p>
