@@ -1,7 +1,7 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import { ScrollReveals } from "@/components/ScrollReveals";
-import { ArrowDown, ArrowUpRight, Braces, Layers3, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Braces, BriefcaseBusiness, Code2, Layers3, Mail, Sparkles } from "lucide-react";
 
 const navigation = [
   { label: "About", href: "#about" },
@@ -202,16 +202,31 @@ export default function Portfolio() {
 
         <section id="contact" className="contact" aria-labelledby="contact-title">
           <div className="shell contact-inner">
-            <div data-reveal="fade-up">
+            <div className="contact-copy" data-reveal="fade-up">
               <p className="eyebrow">Contact</p>
-              <h2 id="contact-title">Have a project in mind?</h2>
+              <h2 id="contact-title">Have a project in mind<span>?</span></h2>
+              <p className="contact-note">I’m open to freelance work and collaborations. Send a message and I’ll get back to you within a day.</p>
             </div>
-            <div className="contact-links" data-reveal="fade-up" style={entranceDelay(500)}>
-              <a className="button" href="mailto:mahmoudsalem3321@gmail.com">Email me <ArrowUpRight size={18} aria-hidden="true" /></a>
-              <div className="profiles">
-                {profiles.map(({ label, href }) => (
-                  <a className="text-link" href={href} key={label}>{label} <ArrowUpRight size={15} aria-hidden="true" /></a>
-                ))}
+            <div className="contact-actions" data-reveal="fade-up" style={entranceDelay(300)}>
+              <a className="contact-primary" href="mailto:mahmoudsalem3321@gmail.com">
+                <span className="contact-primary-icon"><Mail size={21} aria-hidden="true" /></span>
+                <span className="contact-primary-text">
+                  <small>Email me at</small>
+                  <strong>mahmoudsalem3321@gmail.com</strong>
+                </span>
+                <ArrowUpRight size={20} aria-hidden="true" />
+              </a>
+              <div className="contact-socials">
+                <a className="social-link" href={profiles[0].href} target="_blank" rel="noopener">
+                  <Code2 size={19} aria-hidden="true" />
+                  <span>GitHub</span>
+                  <ArrowUpRight size={16} aria-hidden="true" />
+                </a>
+                <a className="social-link" href={profiles[1].href} target="_blank" rel="noopener">
+                  <BriefcaseBusiness size={19} aria-hidden="true" />
+                  <span>LinkedIn</span>
+                  <ArrowUpRight size={16} aria-hidden="true" />
+                </a>
               </div>
             </div>
           </div>
