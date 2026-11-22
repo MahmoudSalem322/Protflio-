@@ -65,7 +65,12 @@ export default function Portfolio() {
       <a className="skip-link" href="#main">Skip to content</a>
       <header className="site-header">
         <div className="shell header-inner">
-          <a className="wordmark" href="#home"><span aria-hidden="true">MS</span> Mahmoud Salem</a>
+          <a className="wordmark" href="#home" aria-label="Mahmoud Salem — back to top">
+            <span className="brand-mark" aria-hidden="true">
+              <Image src="/brand/ms-mark.png" alt="" width={40} height={24} preload />
+            </span>
+            <span className="wordmark-text">Mahmoud Salem</span>
+          </a>
           <nav aria-label="Main navigation">
             {navigation.map(({ label, href }) => <a key={href} href={href}>{label}</a>)}
           </nav>
