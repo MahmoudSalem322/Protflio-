@@ -18,6 +18,7 @@ const services = [
 ];
 
 const projects = [
+  { title: "Masaq", category: "Education platform", stack: "Next.js · TypeScript · Node.js · PostgreSQL", description: "An Arabic RTL platform for exploring courses and learning resources, with verified accounts, saved resources, and admin-managed content backed by a Node.js API.", href: "https://github.com/MahmoudSalem322/masaq", theme: "sand" },
   { title: "Masar Platform", category: "Institution management", stack: "React · TypeScript · Vite", description: "A showcase for a modular platform covering operations, employees, tasks, and reporting.", href: "https://masartesting.vercel.app/", theme: "blue" },
   { title: "Workflow Nets", category: "Team collaboration", stack: "Next.js · TypeScript · Tailwind CSS", description: "Frontend development for a workspace with projects, tasks, clients, invoices, chat, and video meetings.", href: "https://www.workflownets.com/", theme: "violet" },
   { title: "Shifa", category: "Healthcare", stack: "Next.js · React · JavaScript", description: "A platform connecting patients with healthcare providers for appointments, medicine requests, donations, and prescriptions.", href: "https://github.com/MahmoudSalem322/Shifa-v1", theme: "teal" },
