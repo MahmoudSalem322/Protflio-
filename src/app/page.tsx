@@ -58,8 +58,17 @@ function formatDuration(months: number): string {
 const coMentorStart: MonthRef = { year: 2026, month: 7 };
 const today = new Date();
 const thisMonth: MonthRef = { year: today.getFullYear(), month: today.getMonth() + 1 };
+const acceleratorEnd: MonthRef = { year: thisMonth.year + 1, month: 3 };
 
 const experience: Experience[] = [
+  {
+    organization: "TAQAT Academy · CodeMap",
+    role: "Codemap Accelerator Trainee",
+    period: `${formatMonth(thisMonth)} – ${formatMonth(acceleratorEnd)}`,
+    duration: formatDuration(inclusiveMonths(thisMonth, acceleratorEnd)),
+    summary: "Currently enrolled in Codemap Accelerator, an advanced training program building on the CodeMap track through hands-on project work.",
+    contribution: "Developing full-stack features and practicing maintainable code, Git workflows, and AI-assisted development with a mentored cohort.",
+  },
   {
     organization: "Workflow",
     role: "Frontend Developer",
