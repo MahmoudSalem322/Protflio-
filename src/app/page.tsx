@@ -24,7 +24,6 @@ const projects = [
   { title: "Shifa", category: "Healthcare", stack: "Next.js · React · JavaScript", description: "A platform connecting patients with healthcare providers for appointments, medicine requests, donations, and prescriptions.", href: "https://github.com/MahmoudSalem322/Shifa-v1", theme: "teal" },
   { title: "Qabas", category: "Education", stack: "Flutter · Dart · Riverpod", description: "An offline-first learning workspace for web and Android with courses, Markdown notes, reminders, and progress tracking in Arabic and English.", href: "https://github.com/MahmoudSalem322/personal_learning_os", theme: "blue" },
   { title: "Islamic Companion App", category: "Mobile app", stack: "Flutter · Dart · Drift", description: "An Arabic offline-first app for Quran reading, tafsir, adhkar, prayer times, qibla, and reminders.", href: "https://github.com/MahmoudSalem322/hadeel-app", theme: "teal" },
-  { title: "Humanitarian Logistical Hubs", category: "Data analytics", description: "A data analytics interface for monitoring parcels across multiple sites.", theme: "sand" },
 ];
 
 type MonthRef = { year: number; month: number };
