@@ -1,117 +1,60 @@
+import { Fragment, type CSSProperties } from "react";
 import Image from "next/image";
-import type { CSSProperties } from "react";
+import { connection } from "next/server";
+import type { Metadata } from "next";
+import {
+  ArrowDown,
+  ArrowUpRight,
+  Braces,
+  BriefcaseBusiness,
+  Code2,
+  Layers3,
+  Mail,
+  Sparkles,
+  type LucideIcon,
+} from "lucide-react";
 import { ScrollReveals } from "@/components/ScrollReveals";
-import { ArrowDown, ArrowUpRight, Braces, BriefcaseBusiness, Code2, Layers3, Mail, Sparkles } from "lucide-react";
+import { readContent } from "@/lib/content-store";
+import type { IconName } from "@/lib/content-types";
 
-const navigation = [
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Work", href: "#projects" },
-  { label: "Experience", href: "#experience" },
-  { label: "Contact", href: "#contact" },
-];
-
-const services = [
-  { icon: Layers3, title: "Full-stack development", description: "Responsive web applications with Next.js and Node.js, from the interface to authentication and database integration." },
-  { icon: Braces, title: "APIs & integrations", description: "Node.js APIs that connect web applications to databases, backend services, and third-party tools." },
-  { icon: Sparkles, title: "AI-assisted development", description: "Planning, debugging, and reviewing code with Codex and Claude, with hands-on validation of the final result." },
-];
-
-const projects = [
-  { title: "Masaq", category: "Education platform", stack: "Next.js · TypeScript · Node.js · PostgreSQL", description: "An Arabic RTL platform for exploring courses and learning resources, with verified accounts, saved resources, and admin-managed content backed by a Node.js API.", href: "https://github.com/MahmoudSalem322/masaq", theme: "sand" },
-  { title: "Masar Platform", category: "Institution management", stack: "React · TypeScript · Vite", description: "A showcase for a modular platform covering operations, employees, tasks, and reporting.", href: "https://masartesting.vercel.app/", theme: "blue" },
-  { title: "Workflow Nets", category: "Team collaboration", stack: "Next.js · TypeScript · Tailwind CSS", description: "Frontend development for a workspace with projects, tasks, clients, invoices, chat, and video meetings.", href: "https://www.workflownets.com/", theme: "violet" },
-  { title: "Shifa", category: "Healthcare", stack: "Next.js · React · JavaScript", description: "A platform connecting patients with healthcare providers for appointments, medicine requests, donations, and prescriptions.", href: "https://github.com/MahmoudSalem322/Shifa-v1", theme: "teal" },
-  { title: "Qabas", category: "Education", stack: "Flutter · Dart · Riverpod", description: "An offline-first learning workspace for web and Android with courses, Markdown notes, reminders, and progress tracking in Arabic and English.", href: "https://github.com/MahmoudSalem322/personal_learning_os", theme: "blue" },
-  { title: "Islamic Companion App", category: "Mobile app", stack: "Flutter · Dart · Drift", description: "An Arabic offline-first app for Quran reading, tafsir, adhkar, prayer times, qibla, and reminders.", href: "https://github.com/MahmoudSalem322/hadeel-app", theme: "teal" },
-];
-
-type MonthRef = { year: number; month: number };
-type Experience = {
-  organization: string;
-  role: string;
-  period: string;
-  duration?: string;
-  summary: string;
-  contribution: string;
+const iconMap: Record<IconName, LucideIcon> = {
+  Layers3,
+  Braces,
+  Sparkles,
+  Code2,
+  BriefcaseBusiness,
+  Mail,
+  ArrowUpRight,
 };
 
-const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-function formatMonth({ year, month }: MonthRef): string {
-  return `${monthNames[month - 1]} ${year}`;
+export async function generateMetadata(): Promise<Metadata> {
+  await connection();
+  const { site } = await readContent();
+  return {
+    alternates: { canonical: site.canonical },
+    title: site.title,
+    description: site.description,
+  };
 }
-
-function inclusiveMonths(start: MonthRef, end: MonthRef): number {
-  return (end.year - start.year) * 12 + (end.month - start.month) + 1;
-}
-
-function formatDuration(months: number): string {
-  if (months < 12) return `${months} month${months === 1 ? "" : "s"}`;
-  const years = Math.floor(months / 12);
-  const remaining = months % 12;
-  if (!remaining) return `${years} year${years === 1 ? "" : "s"}`;
-  return `${years} yr ${remaining} mo`;
-}
-
-const coMentorStart: MonthRef = { year: 2026, month: 7 };
-const today = new Date();
-const thisMonth: MonthRef = { year: today.getFullYear(), month: today.getMonth() + 1 };
-const acceleratorEnd: MonthRef = { year: thisMonth.year + 1, month: 3 };
-
-const experience: Experience[] = [
-  {
-    organization: "TAQAT Academy · CodeMap",
-    role: "Codemap Accelerator Trainee",
-    period: `${formatMonth(thisMonth)} – ${formatMonth(acceleratorEnd)}`,
-    duration: formatDuration(inclusiveMonths(thisMonth, acceleratorEnd)),
-    summary: "Currently enrolled in Codemap Accelerator, an advanced training program building on the CodeMap track through hands-on project work.",
-    contribution: "Developing full-stack features and practicing maintainable code, Git workflows, and AI-assisted development with a mentored cohort.",
-  },
-  {
-    organization: "Workflow",
-    role: "Frontend Developer",
-    period: "Jul 2026 – Present",
-    summary: "Build and maintain responsive features for a SaaS workspace where agile teams plan, manage, and collaborate on their work.",
-    contribution: "Integrate interfaces built with Next.js, TypeScript, and Tailwind CSS with backend services and collaborate through GitHub and Vercel.",
-  },
-  {
-    organization: "TAQAT Academy",
-    role: "Co-Mentor, CodeMap Program",
-    period: `${formatMonth(coMentorStart)} – ${formatMonth(thisMonth)}`,
-    duration: formatDuration(inclusiveMonths(coMentorStart, thisMonth)),
-    summary: "Supported the lead mentor and coached trainees on clean, maintainable code and applying the software development lifecycle to real projects.",
-    contribution: "Helped trainees use AI development tools responsibly to improve productivity and code quality.",
-  },
-  {
-    organization: "TAQAT Academy · CodeMap Program",
-    role: "Frontend Developer (Trainee)",
-    period: "May – Aug 2026",
-    summary: "Took ownership of the Next.js frontend for Masar, a management platform for institutions and NGOs, as part of a mentored development team.",
-    contribution: "Collaborated with teammates using Git, GitHub, and Vercel.",
-  },
-];
-
-const profiles = [
-  { label: "GitHub", href: "https://github.com/MahmoudSalem322" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/mahmoud-salem-052495419" },
-];
 
 function entranceDelay(milliseconds: number): CSSProperties {
   return { "--entry-delay": `${milliseconds}ms` } as CSSProperties;
 }
 
-export default function Portfolio() {
+export default async function Portfolio() {
+  await connection();
+  const { site, navigation, hero, about, services, projects, experience, contact } = await readContent();
+
   return (
     <>
       <a className="skip-link" href="#main">Skip to content</a>
       <header className="site-header">
         <div className="shell header-inner">
-          <a className="wordmark" href="#home" aria-label="Mahmoud Salem — back to top">
+          <a className="wordmark" href="#home" aria-label={`${site.name} — back to top`}>
             <span className="brand-mark" aria-hidden="true">
-              <Image src="/brand/ms-mark.png" alt="" width={40} height={24} preload />
+              <Image src={site.brandMark} alt="" width={40} height={24} preload />
             </span>
-            <span className="wordmark-text">Mahmoud Salem</span>
+            <span className="wordmark-text">{site.name}</span>
           </a>
           <nav aria-label="Main navigation">
             {navigation.map(({ label, href }) => <a key={href} href={href}>{label}</a>)}
@@ -124,20 +67,31 @@ export default function Portfolio() {
         <section id="home" className="hero" aria-labelledby="hero-title">
           <div className="shell hero-inner">
             <div>
-              <p className="eyebrow" data-entrance="" style={entranceDelay(200)}>Full-stack developer</p>
-              <h1 id="hero-title" data-entrance="" style={entranceDelay(300)}>Mahmoud<br />Salem<span>.</span></h1>
-              <p className="hero-description" data-entrance="" style={entranceDelay(400)}>I build web applications with Next.js and Node.js, connecting responsive interfaces to APIs and databases.</p>
+              <p className="eyebrow" data-entrance="" style={entranceDelay(200)}>{hero.eyebrow}</p>
+              <h1 id="hero-title" data-entrance="" style={entranceDelay(300)}>
+                {hero.titleLines.map((line, index) => (
+                  <Fragment key={`${line}-${index}`}>{index > 0 && <br />}{line}</Fragment>
+                ))}
+                <span>{hero.titleAccent}</span>
+              </h1>
+              <p className="hero-description" data-entrance="" style={entranceDelay(400)}>{hero.description}</p>
               <div className="hero-actions" data-entrance="" style={entranceDelay(500)}>
-                <a className="button" href="#projects">View my work <ArrowDown size={18} aria-hidden="true" /></a>
-                <a className="text-link" href="#contact">Get in touch <ArrowUpRight size={17} aria-hidden="true" /></a>
-                <a id="cv" className="text-link" href="/Mahmoud_Salem_CV.pdf" target="_blank" rel="noopener">
-                  View CV <ArrowUpRight size={17} aria-hidden="true" />
+                <a className="button" href={hero.primaryHref}>{hero.primaryLabel} <ArrowDown size={18} aria-hidden="true" /></a>
+                <a className="text-link" href={hero.secondaryHref}>{hero.secondaryLabel} <ArrowUpRight size={17} aria-hidden="true" /></a>
+                <a id="cv" className="text-link" href={site.cvHref} target="_blank" rel="noopener">
+                  {hero.cvLabel} <ArrowUpRight size={17} aria-hidden="true" />
                 </a>
               </div>
             </div>
             <div className="portrait" data-entrance="portrait">
-              <Image src="/mahmoud-salem.png" alt="Mahmoud Salem" width={1254} height={1254}
-                sizes="(max-width: 700px) 90vw, (max-width: 1160px) 40vw, 450px" preload />
+              <Image
+                src={site.portrait}
+                alt={site.portraitAlt}
+                width={1254}
+                height={1254}
+                sizes="(max-width: 700px) 90vw, (max-width: 1160px) 40vw, 450px"
+                preload
+              />
             </div>
           </div>
         </section>
@@ -145,32 +99,40 @@ export default function Portfolio() {
         <section id="about" className="shell section about" aria-labelledby="about-title">
           <h2 id="about-title" data-reveal="fade-up">About me</h2>
           <div data-reveal="zoom-in" style={entranceDelay(500)}>
-            <p>I build the frontend and backend of web applications, from responsive pages to the services and databases behind them.</p>
-            <p>I use Codex and Claude to support planning, implementation, debugging, and code review.</p>
+            {about.paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
             <ul className="tech-list" aria-label="Technologies">
-              {["Next.js", "Node.js", "React", "TypeScript", "Flutter"].map((tech) => <li key={tech}>{tech}</li>)}
+              {about.techList.map((tech) => <li key={tech}>{tech}</li>)}
             </ul>
           </div>
         </section>
 
         <section id="services" className="shell section" aria-labelledby="services-title">
-          <h2 id="services-title" data-reveal="fade-up">Services</h2>
+          <h2 id="services-title" data-reveal="fade-up">{services.heading}</h2>
           <div className="services-grid">
-            {services.map(({ icon: Icon, title, description }, index) => (
-              <article className="service" key={title} data-reveal="zoom-out-up" style={entranceDelay(200 + index * 100)}>
-                <Icon size={26} aria-hidden="true" />
-                <h3>{title}</h3>
-                <p>{description}</p>
-              </article>
-            ))}
+            {services.items.map(({ icon, title, description }, index) => {
+              const Icon = iconMap[icon];
+              return (
+                <article className="service" key={`${title}-${index}`} data-reveal="zoom-out-up" style={entranceDelay(200 + index * 100)}>
+                  <Icon size={26} aria-hidden="true" />
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </article>
+              );
+            })}
           </div>
         </section>
 
         <section id="projects" className="shell section" aria-labelledby="projects-title">
-          <h2 id="projects-title" data-reveal="fade-up">Selected work</h2>
+          <h2 id="projects-title" data-reveal="fade-up">{projects.heading}</h2>
           <div className="project-grid">
-            {projects.map(({ title, category, stack, description, href, theme }, index) => (
-              <article className="project" data-theme={theme} key={title} data-reveal="fade-up" style={entranceDelay(200 + index * 100)}>
+            {projects.items.map(({ title, category, stack, description, href, theme }, index) => (
+              <article
+                className="project"
+                data-theme={theme}
+                key={`${title}-${index}`}
+                data-reveal="fade-up"
+                style={entranceDelay(200 + index * 100)}
+              >
                 <div className="project-heading">
                   <div>
                     <p className="project-category">{category}</p>
@@ -190,10 +152,10 @@ export default function Portfolio() {
         </section>
 
         <section id="experience" className="shell section" aria-labelledby="experience-title">
-          <h2 id="experience-title" data-reveal="fade-up">Experience</h2>
+          <h2 id="experience-title" data-reveal="fade-up">{experience.heading}</h2>
           <ul className="experience-list">
-            {experience.map(({ role, organization, period, duration, summary, contribution }, index) => (
-              <li className="experience-entry" key={role} data-reveal="fade-up" style={entranceDelay(200 + index * 100)}>
+            {experience.items.map(({ role, organization, period, duration, summary, contribution }, index) => (
+              <li className="experience-entry" key={`${role}-${index}`} data-reveal="fade-up" style={entranceDelay(200 + index * 100)}>
                 <span className="experience-period">
                   {period}
                   {duration && <span className="experience-duration">{duration}</span>}
@@ -212,37 +174,37 @@ export default function Portfolio() {
         <section id="contact" className="contact" aria-labelledby="contact-title">
           <div className="shell contact-inner">
             <div className="contact-copy" data-reveal="fade-up">
-              <p className="eyebrow">Contact</p>
-              <h2 id="contact-title">Have a project in mind<span>?</span></h2>
-              <p className="contact-note">I’m open to freelance work and collaborations. Send a message and I’ll get back to you within a day.</p>
+              <p className="eyebrow">{contact.eyebrow}</p>
+              <h2 id="contact-title">{contact.heading}<span>{contact.headingAccent}</span></h2>
+              <p className="contact-note">{contact.note}</p>
             </div>
             <div className="contact-actions" data-reveal="fade-up" style={entranceDelay(300)}>
-              <a className="contact-primary" href="mailto:mahmoudsalem3321@gmail.com">
+              <a className="contact-primary" href={`mailto:${contact.email}`}>
                 <span className="contact-primary-icon"><Mail size={21} aria-hidden="true" /></span>
                 <span className="contact-primary-text">
-                  <small>Email me at</small>
-                  <strong>mahmoudsalem3321@gmail.com</strong>
+                  <small>{contact.emailLabel}</small>
+                  <strong>{contact.email}</strong>
                 </span>
                 <ArrowUpRight size={20} aria-hidden="true" />
               </a>
               <div className="contact-socials">
-                <a className="social-link" href={profiles[0].href} target="_blank" rel="noopener">
-                  <Code2 size={19} aria-hidden="true" />
-                  <span>GitHub</span>
-                  <ArrowUpRight size={16} aria-hidden="true" />
-                </a>
-                <a className="social-link" href={profiles[1].href} target="_blank" rel="noopener">
-                  <BriefcaseBusiness size={19} aria-hidden="true" />
-                  <span>LinkedIn</span>
-                  <ArrowUpRight size={16} aria-hidden="true" />
-                </a>
+                {contact.socials.map(({ icon, label, href }, index) => {
+                  const Icon = iconMap[icon];
+                  return (
+                    <a className="social-link" href={href} key={`${label}-${index}`} target="_blank" rel="noopener">
+                      <Icon size={19} aria-hidden="true" />
+                      <span>{label}</span>
+                      <ArrowUpRight size={16} aria-hidden="true" />
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="shell site-footer">© {new Date().getFullYear()} Mahmoud Salem</footer>
+      <footer className="shell site-footer">© {new Date().getFullYear()} {site.name}</footer>
     </>
   );
 }
